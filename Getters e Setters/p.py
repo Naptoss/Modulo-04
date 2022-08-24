@@ -6,3 +6,22 @@ class Produto:
 
 def desconto(self, percentual):
     self.preco = self.preco - (self.preco * (percentual / 100))
+
+    # Getter
+
+    @property
+    def preco(self):
+        return self._preco
+
+    # Setter
+    @preco.setter
+    def preco(self, valor):
+        if isinstance(valor, str):
+            valor = float(valor.replace("R$", ""))
+
+        self._preco = valor
+
+
+p1 = Produto("CAMISETA", 50)
+p1.desconto(10)
+print(p1.nome, p1.preco)
