@@ -1,3 +1,4 @@
 import varias_linhas
+import funcoes
 
-help(varias_linhas)
+help(funcoes)
