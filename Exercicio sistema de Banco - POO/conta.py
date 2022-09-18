@@ -1,31 +1,45 @@
-class Contas:
-    def __init__(self, agencia, id, saldo=0):
+
+from abc import ABC, abstractclassmethod
+
+
+class Conta:
+    def __init__(self, agencia, conta, saldo=0):
         self.agencia = agencia
-        self.id = id
+        self.conta = conta
         self.saldo = saldo
-        self.operacoes = [("DEPOSITO", saldo)]
 
-    def saque(self, valor):
-        if self.saque <= valor:
-            self.saldo -= valor
-            self.operacoes += [("SAQUE", valor)]
-        else:
-            print("Saldo Insuficiente")
-
-    def deposito(self, valor):
+    def depositar(self, valor):
         self.saldo += valor
-        self.operacoes[("DEPOSITO", valor)]
+        self.detalhes()
 
-    def extrato(self):
-        print("Extrato CC numero %s \n" % self.numero)
-        for op in self.operacoes:
-            print("%10s %10.2f\n" % (op[0], op[1]))
-            print("\n Saldo: %10.2f\n" % self.saldo)
+    def detalhes(self):
+        print(f'Agência: {self.agencia} '
+              f'Conta: {self.conta} '
+              f'Saldo: {self.saldo}')
 
-
-class ContaPoupanca(Contas):
-    pass
+    @abstractclassmethod
+    def sacar(self, valor): pass
 
 
-class ContaCorrente(Contas):
-    pass
+class ContaPoupanca(Conta):
+    def sacar(self, valor):
+        if self.saldo < valor:
+            print("Valor insuficiente")
+            return
+
+        self.saldo -= valor
+        self.detalhes()
+
+
+class ContaCorrente(Conta):
+    def __init__(self, agencia, conta, saldo, limite=10):
+        super().__init__(agencia, conta, saldo)
+        self.limite = limite
+
+    def sacar(self, valor):
+        if (self.saldo + self.limite) < valor:
+            print("Saldo Insuficiente")
+            return
+
+        self.saldo -= valor
+        self.detalhes()
