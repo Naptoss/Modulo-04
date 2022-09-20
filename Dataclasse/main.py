@@ -13,3 +13,13 @@ from dataclasses import dataclass
 class Pessoa:
     nome: str
     sobrenome: str
+    idade: int
+
+    @property
+    def nome_e_idade_completo(self):
+        return f"{self.nome} {self.sobrenome} tem {self.idade} "
+
+
+p1 = Pessoa("Antonio", "Gabinio", 18)
+
+print(p1.nome_e_idade_completo)
