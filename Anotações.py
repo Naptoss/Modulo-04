@@ -127,4 +127,11 @@ snake_case - este é o padrão usado em Python para definir qualquer coisa que n
 Todas as letras serão minúsculas e separadas por um underline, 
 como em: minha_variavel, funcao_legal, soma.
 
+Oque são dataclasses ?: O módulo Dataclasses fornece um decorador e funções
+para criar automaticamente métodos, como __init__(), __repr__(), __eq__ (etc)
+em classes definidas pelo usuário.
+Basicamente, dataclasses são syntax sugar para criar classes normais.
+Foi originalmente descrito na PEP 557.
+Adicionado na versão 3.7 do Python.
+
 """
